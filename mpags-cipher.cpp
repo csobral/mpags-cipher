@@ -5,14 +5,29 @@
 int main(int argc, char* argv[]) {
 	
 	//Runs through command line arguments
+	int exit_flag{0}; //if --help and/or --version are called, print then exit
 	for(int i = 0; i < argc; ++i) {
+		
 		std::string arg{argv[i]}; //Converts c-style to c++ style string
+		
 		//Looks for a help flag, prints "helpful" advice and exits program
 		if(arg == "--help" || arg == "-h") {
 			std::cout << "This program de/encrypts plain text using 3 classic ciphers" << std::endl;
-			return(0);
+			exit_flag = 1;
+		}
+		//Prints mpags-cipher version if prompted
+		else if(arg == "--version") {
+			std::cout << "mpags-cipher v0.3.0" << std::endl;
+			exit_flag = 1;
+		}
+		//Gets input file from argument
+		else if(arg == "-i") {
+			
 		}
 	}
+
+	//Checks whether program should exit
+        if(exit_flag == 1) return(0);
 
 	char in_char{'x'};
 	std::string output{"0"}; 
