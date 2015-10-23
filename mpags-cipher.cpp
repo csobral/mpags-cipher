@@ -3,9 +3,15 @@
 #include <string>
 
 int main(int argc, char* argv[]) {
-
+	
+	//Runs through command line arguments
 	for(int i = 0; i < argc; ++i) {
-		std::cout << argv[i] << std::endl;
+		std::string arg{argv[i]}; //Converts c-style to c++ style string
+		//Looks for a help flag, prints "helpful" advice and exits program
+		if(arg == "--help" || arg == "-h") {
+			std::cout << "This program de/encrypts plain text using 3 classic ciphers" << std::endl;
+			return(0);
+		}
 	}
 
 	char in_char{'x'};
