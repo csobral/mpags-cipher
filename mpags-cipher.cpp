@@ -2,13 +2,49 @@
 #include <iostream>
 #include <string>
 
+std::string transformChar(char inputc) {
+	/*
+	 * Function takes a single character from keyboard input.
+	 * If character was a letter, it returns that letter in uppercase
+	 * If character was a number, it returns the word for that number (1->"ONE")
+	 *
+	 * Argument is a single char and the function returns a string.
+	 * */
+	std::string output{"0"};
+	//Checks whether input is number, lower, or upper case letter. Disregards input otherwise
+	if(isdigit(inputc)) {
+		switch(inputc) {
+			case('0'): output = "ZERO"; break;
+			case('1'): output = "ONE"; break;
+			case('2'): output = "TWO"; break;
+			case('3'): output = "THREE"; break;
+			case('4'): output = "FOUR"; break;
+			case('5'): output = "FIVE"; break;
+			case('6'): output = "SIX"; break;
+			case('7'): output = "SEVEN"; break;
+			case('8'): output = "EIGHT"; break;
+			case('9'): output = "NINE"; break;
+		}
+	}
+	else if(islower(inputc)) {
+		output = toupper(inputc);
+	}
+	else if(isupper(inputc)){
+		output = inputc;
+	}
+	
+	return output;
+}
 int main(int argc, char* argv[]) {
 	
 	//Runs through command line arguments
 	int exit_flag{0}; //if --help and/or --version are called, print then exit
+	std::string arg{""};
+	std::string iFile{"input.txt"};
+	std::string oFile{"output.txt"};
 	for(int i = 0; i < argc; ++i) {
 		
-		std::string arg{argv[i]}; //Converts c-style to c++ style string
+		arg = argv[i]; //Converts c-style to c++ style string
 		
 		//Looks for a help flag, prints "helpful" advice and exits program
 		if(arg == "--help" || arg == "-h") {
@@ -33,28 +69,8 @@ int main(int argc, char* argv[]) {
 	std::string output{"0"}; 
 	while(std::cin >> in_char) //Keeps looking for input until user presses ctrl+D
 	{
-		//Checks whether input is number, lower, or upper case letter. Disregards input otherwise
-		if(isdigit(in_char)) {
-			switch(in_char) {
-				case('0'): output = "ZERO"; break;
-				case('1'): output = "ONE"; break;
-				case('2'): output = "TWO"; break;
-				case('3'): output = "THREE"; break;
-				case('4'): output = "FOUR"; break;
-				case('5'): output = "FIVE"; break;
-				case('6'): output = "SIX"; break;
-				case('7'): output = "SEVEN"; break;
-				case('8'): output = "EIGHT"; break;
-				case('9'): output = "NINE"; break;
-			}
-		}
-		else if(islower(in_char)) {
-			output = toupper(in_char);
-		}
-		else if(isupper(in_char)){
-			output = in_char;
-		}
-	std::cout << output << std::endl;
+		output = transformChar(in_char); //Takes input character and returns a string
+		std::cout << output << std::endl;
 	}
 
   return 0;
