@@ -19,7 +19,7 @@ void readStream(T& inputstream, std::string& message) {
 int main(int argc, char* argv[]) {
 	
 	//Initialise command line argument flags
-	CmdlineInfo flags{false, false, false, false, false, "", "", false, false, 1};
+	CmdlineInfo flags;
 	bool exit_flag{false}; //if --help and/or --version are called, print then exit
 
 	//Vector to hold stream of characters
@@ -63,7 +63,7 @@ int main(int argc, char* argv[]) {
 	}
 	
 
-	CaesarCipher cipher(flags.key, flags.decrypt);
+	CaesarCipher cipher(flags.key, flags.mode);
 	std::cout<< cipher.encode(trans_msg) << std::endl;	
 	
 	return 0;

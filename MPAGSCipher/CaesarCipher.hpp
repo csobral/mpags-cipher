@@ -1,25 +1,27 @@
 #ifndef MPAGSCIPHER_CAESARCIPHER_HPP
 #define MPAGSCIPHER_CAESARCIPHER_HPP
 
+#include "processCommandLine.hpp"
+
 //! De/encrypt a message using the Caesar cipher
 
 /**
- * Caesar Cipher contains an integer key and a bool flagging
+ * Caesar Cipher contains an integer key and an enum flagging
  * whether to encrypt or decrypt a message.
  *
- * Create a CaesarCipher object using CaesarCipher object(key,decrypt)
+ * Create a CaesarCipher object using CaesarCipher object(key,mode)
  * Decrypt/Encrypt a message with object.encode(message)
  */
 class CaesarCipher {
   public:
 	/**
  	* Create a new CaesarCipher object with a key provided
- 	* by the user and a bool 'decrypt' (false = encrypt)
+ 	* by the user and an enum 'mode'
  	*
  	* \param key The integer cipher key
- 	* \param decrypt The flag that checks if cipher is running in decrypt mode
+ 	* \param mode The flag that checks if cipher is running in decrypt mode
  	*/
-	CaesarCipher(const int& key, const bool& decrypt);
+	CaesarCipher(const int& key, const CipherMode& mode);
 
 	/**
 	* Decrypt/Encrypt a message provided by the user
@@ -44,7 +46,7 @@ class CaesarCipher {
 	int key_;
 
 	/// \param Flag the checks whether cipher is running in decrypt mode
-	const bool decrypt_;
+	const CipherMode mode_;
 };
 
 

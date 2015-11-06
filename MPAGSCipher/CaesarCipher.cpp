@@ -1,8 +1,8 @@
 #include <string>
 #include "CaesarCipher.hpp"
 
-CaesarCipher::CaesarCipher(const int& key, const bool& decrypt)
-  : key_{key}, decrypt_{decrypt}
+CaesarCipher::CaesarCipher(const int& key, const CipherMode& mode)
+  : key_{key}, mode_{mode}
 {
 }
 
@@ -23,7 +23,7 @@ std::string CaesarCipher::encode(const std::string& message) {
 	int abc_pos{0}; //Position in the alphabet of specific letter (A=0,Z=25)
 	int ciph_pos{1}; //Position of ciphered letter in the alphabet
 
-	if(decrypt_) key_= -key_; //if decrypting, key becomes negative
+	if(mode_ == CipherMode::decrypt) key_= -key_; //if decrypting, key becomes negative
 
 	for(const char& lett : message) { //For each letter in the original message
 		abc_pos = findPos(lett, alphabet); //Get alphabet position of original char

@@ -3,19 +3,34 @@
 
 //! Processes all command line arguments
 
-struct CmdlineInfo{
-	bool error_flag;
-	bool h_flag;
-	bool v_flag;
-	bool i_flag;
-	bool o_flag;
-	std::string iFile;
-	std::string oFile;
-	bool decrypt;
-	bool key_flag;
-	int key;
+/**
+ * Flags if mpags-cipher should encrypt or decrypt the message provided
+ */
+enum class CipherMode {
+	decrypt,
+	encrypt
 };
 
+/**
+ * All the flags that the user can give when running mpags-cipher
+ */
+struct CmdlineInfo{
+	bool error_flag = false;
+	bool h_flag = false;
+	bool v_flag = false;
+	bool i_flag = false;
+	bool o_flag = false;
+	std::string iFile;
+	std::string oFile;
+	CipherMode mode = CipherMode::encrypt;
+	bool key_flag = false;
+	int key = 0;
+};
+
+/**
+ * processCommandLine takes in all the provided cmd line arguments
+ * and raises the appropriate flags required
+ */
 void processCommandLine(const int argc, char* argv[], CmdlineInfo& flags);
 
 #endif // MPAGSCIPHER_PROCESSCOMMANDLINE_HPP

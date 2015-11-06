@@ -30,7 +30,7 @@ void processCommandLine(const int argc, char* argv[], CmdlineInfo& flags) {
 		else if(arg == "--version") flags.v_flag = true;
 		
 		//Check if program should de/encrypt
-		else if(arg == "--decrypt") flags.decrypt = true;
+		else if(arg == "--decrypt") flags.mode = CipherMode::decrypt;
 		
 		//Check if user supplied a cipher key
 		else if(arg == "-k") {
