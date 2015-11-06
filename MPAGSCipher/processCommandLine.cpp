@@ -1,7 +1,8 @@
 #include <iostream>
 #include <string>
+#include "processCommandLine.hpp"
 
-bool processCommandLine(const int argc, char* argv[], bool& error_flag, bool& h_flag, bool& v_flag, bool& i_flag, bool& o_flag, std::string& iFile, std::string& oFile, bool& decrypt, bool& key_flag, int& key) {
+void processCommandLine(const int argc, char* argv[], CmdlineInfo& flags) {
 	/*
 	 * Function: Check which flags/options were given as arguments to mpags-cipher
 	 * 
@@ -23,28 +24,28 @@ bool processCommandLine(const int argc, char* argv[], bool& error_flag, bool& h_
 		arg = argv[i]; //Convert c-style to c++ style string
 		
 		//Check if prompted for help
-		if(arg == "--help" || arg == "-h") h_flag = true;
+		if(arg == "--help" || arg == "-h") flags.h_flag = true;
 		
 		//Check if prompted for version number
-		else if(arg == "--version") v_flag = true;
+		else if(arg == "--version") flags.v_flag = true;
 		
 		//Check if program should de/encrypt
-		else if(arg == "--decrypt") decrypt = true;
+		else if(arg == "--decrypt") flags.decrypt = true;
 		
 		//Check if user supplied a cipher key
 		else if(arg == "-k") {
 			if(i == (argc-1)) { //If it's the last argument
-				error_flag = true;
+				flags.error_flag = true;
 				std::cout << "Please specify a cipher key using the arguments:\n"
                                  << "-k integer_key" << std::endl;
 			}
-			/*else if(argv[i+1][0] == '-') {
-				error_flag = true;
-				std::cout << "Cannot recognise cipher key!" << std::endl;
-			}*/
+			else if(argv[i+1][0] == '-') {
+				flags.error_flag = true;
+				std::cout << "The key should be a positive integer!" << std::endl;
+			}
 			else {
-				key = std::stoi(argv[i+1]); //Get key from list of arguments
-				key_flag = true;
+				flags.key = std::stoi(argv[i+1]); //Get key from list of arguments
+				flags.key_flag = true;
 			}
 		}
 			
@@ -52,17 +53,17 @@ bool processCommandLine(const int argc, char* argv[], bool& error_flag, bool& h_
 		//Check if user supplied input file
 		else if(arg == "-i") {
 			if(i == (argc-1)) { //If it's the last argument
-				error_flag = true;
+				flags.error_flag = true;
 				std::cout << "Please specify an input file with the arguments:\n"
                                  << "-i input_file_name" << std::endl;
 			}
 			else if(argv[i+1][0] == '-') {
-				error_flag = true;
+				flags.error_flag = true;
 				std::cout << "Cannot recognise input file name!" << std::endl;
 			}
 			else {
-				i_flag = true;
-				iFile = argv[i+1]; //Get file name from list of arguments
+				flags.i_flag = true;
+				flags.iFile = argv[i+1]; //Get file name from list of arguments
 
 			}
 		}
@@ -70,21 +71,20 @@ bool processCommandLine(const int argc, char* argv[], bool& error_flag, bool& h_
 		//Check if user supplied output file
 		else if(arg == "-o") {
 			if(i == (argc-1)) { //If it's the last argument
-				error_flag = true;
+				flags.error_flag = true;
 				std::cout << "Please specify an output file with the arguments:\n"
                                  << "-o output_file_name" << std::endl;
 			}
 			else if(argv[i+1][0] == '-') {
-				error_flag = true;
+				flags.error_flag = true;
 				std::cout << "Cannot recognise output file name!" << std::endl;
 			}
 			else {
-				o_flag = true;
-				oFile = argv[i+1]; //Get file name from list of arguments
+				flags.o_flag = true;
+				flags.oFile = argv[i+1]; //Get file name from list of arguments
 
 			}
 		}
 	}
 
-	return error_flag;
 }

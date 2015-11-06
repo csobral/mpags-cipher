@@ -1,6 +1,12 @@
 #include <string>
+#include "CaesarCipher.hpp"
 
-int FindPos(const char& lett, const std::string& alphabet) { 
+CaesarCipher::CaesarCipher(const int& key, const bool& decrypt)
+  : key_{key}, decrypt_{decrypt}
+{
+}
+
+int CaesarCipher::findPos(const char& lett, const std::string& alphabet) { 
 	
 	int pos{0};
 	for(unsigned int i = 0; i < alphabet.size(); ++i) {
@@ -10,18 +16,18 @@ int FindPos(const char& lett, const std::string& alphabet) {
 	return pos;
 }
 
-std::string CaesarCipher(const std::string& message, const bool decrypt, int key) {
+std::string CaesarCipher::encode(const std::string& message) {
 	
 	std::string ciphertext{""}; //String to hold ciphered message
 	std::string alphabet{"ABCDEFGHIJKLMNOPQRSTUVWXYZ"}; //The alphabet to find letter position
 	int abc_pos{0}; //Position in the alphabet of specific letter (A=0,Z=25)
 	int ciph_pos{1}; //Position of ciphered letter in the alphabet
 
-	if(decrypt) key = -key; //if decrypting, key becomes negative
+	if(decrypt_) key_= -key_; //if decrypting, key becomes negative
 
 	for(const char& lett : message) { //For each letter in the original message
-		abc_pos = FindPos(lett, alphabet); //Get alphabet position of original char
-		ciph_pos = (abc_pos + key) % alphabet.size(); //Get position of ciphered char
+		abc_pos = findPos(lett, alphabet); //Get alphabet position of original char
+		ciph_pos = (abc_pos + key_) % alphabet.size(); //Get position of ciphered char
 		ciphertext += alphabet[ciph_pos]; //Get the de/encrypted message
 	}
 	

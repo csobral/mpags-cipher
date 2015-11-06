@@ -8,7 +8,7 @@ std::string transformChar(const char inputc) {
 	 *
 	 * Argument is a single char and the function returns a string.
 	 * */
-	std::string output{"0"};
+	std::string output{""};
 
 	//Checks whether input is number, lower, or upper case letter. Disregards input otherwise
 	if(isdigit(inputc)) {
