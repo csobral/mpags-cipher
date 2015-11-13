@@ -1,7 +1,7 @@
 #ifndef MPAGSCIPHER_CAESARCIPHER_HPP
 #define MPAGSCIPHER_CAESARCIPHER_HPP
 
-#include "processCommandLine.hpp"
+#include "ProcessCommandLine.hpp"
 
 //! De/encrypt a message using the Caesar cipher
 

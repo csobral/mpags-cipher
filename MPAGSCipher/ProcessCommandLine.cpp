@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "processCommandLine.hpp"
+#include "ProcessCommandLine.hpp"
 
 void processCommandLine(const int argc, char* argv[], CmdlineInfo& flags) {
 	/*

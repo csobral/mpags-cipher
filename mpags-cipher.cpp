@@ -8,7 +8,7 @@
 
 // Project headers
 #include "TransformChar.hpp"
-#include "processCommandLine.hpp"
+#include "ProcessCommandLine.hpp"
 #include "CaesarCipher.hpp"
 
 template <typename T>
