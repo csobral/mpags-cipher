@@ -29,7 +29,7 @@ class CaesarCipher {
 	*
 	* \param message The message the user wants to de/encrypt
 	*/ 
-	std::string encode(const std::string& message);
+	std::string encrypt(const std::string& message);
 
   private:
 	/**

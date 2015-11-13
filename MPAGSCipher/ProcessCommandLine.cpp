@@ -37,18 +37,41 @@ void processCommandLine(const int argc, char* argv[], CmdlineInfo& flags) {
 			if(i == (argc-1)) { //If it's the last argument
 				flags.error_flag = true;
 				std::cout << "Please specify a cipher key using the arguments:\n"
-                                 << "-k integer_key" << std::endl;
+                                 << "-k key" << std::endl;
 			}
 			else if(argv[i+1][0] == '-') {
 				flags.error_flag = true;
-				std::cout << "The key should be a positive integer!" << std::endl;
+				std::cout << "Please provide a valid key!" << std::endl;
 			}
 			else {
-				flags.key = std::stoi(argv[i+1]); //Get key from list of arguments
+				flags.key = argv[i+1]; //Get key from list of arguments
 				flags.key_flag = true;
 			}
 		}
-			
+		
+		//Check if user specified which cipher should be used
+		else if(arg == "--cipher") {
+			if(i == (argc-1)) { //If it's the last argument
+				flags.error_flag = true;
+				std::cout << "Please specify what cipher should be used with:\n"
+                                 << "--cipher ciphername\n" 
+				 << "ciphername = caesar || playfair" << std::endl;
+			}
+			else {
+				std::string ciphstr = argv[i+1];
+				if(ciphstr == "caesar"){
+					flags.cipher = CipherType::caesar;
+				}
+				else if(ciphstr == "playfair") {
+					flags.cipher = CipherType::playfair;
+				}
+				else {
+					flags.error_flag = true;
+					std::cout << "Please provide a valid cipher type!\n"
+				 	<< "Valid ciphers: caesar, playfair" << std::endl;
+				}
+			}
+		}	
 
 		//Check if user supplied input file
 		else if(arg == "-i") {

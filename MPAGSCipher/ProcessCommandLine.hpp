@@ -11,6 +11,11 @@ enum class CipherMode {
 	encrypt
 };
 
+enum class CipherType {
+	caesar,
+	playfair
+};
+
 /**
  * All the flags that the user can give when running mpags-cipher
  */
@@ -24,7 +29,10 @@ struct CmdlineInfo{
 	std::string oFile;
 	CipherMode mode = CipherMode::encrypt;
 	bool key_flag = false;
-	int key = 0;
+	std::string key = "";
+	CipherType cipher = CipherType::caesar;
+	
+	
 };
 
 /**

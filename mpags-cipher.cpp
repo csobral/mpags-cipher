@@ -10,6 +10,7 @@
 #include "TransformChar.hpp"
 #include "ProcessCommandLine.hpp"
 #include "CaesarCipher.hpp"
+#include "PlayfairCipher.hpp"
 
 template <typename T>
 void readStream(T& inputstream, std::string& message) {
@@ -62,9 +63,15 @@ int main(int argc, char* argv[]) {
 		trans_msg += transformChar(ele); //Spells out numbers, all letters uppercase
 	}
 	
-
-	CaesarCipher cipher(flags.key, flags.mode);
-	std::cout<< cipher.encode(trans_msg) << std::endl;	
+	if(flags.cipher == CipherType::caesar) {
+		CaesarCipher cipher(stoi(flags.key), flags.mode);
+		std::cout<< cipher.encrypt(trans_msg) << std::endl;
+	}
+	else if(flags.cipher == CipherType::playfair) {
+		PlayfairCipher cipher(flags.key, flags.mode);
+		std::cout<< cipher.encrypt(trans_msg) << std::endl;
+	}
+		
 	
 	return 0;
 }

@@ -16,7 +16,7 @@ int CaesarCipher::findPos(const char& lett, const std::string& alphabet) {
 	return pos;
 }
 
-std::string CaesarCipher::encode(const std::string& message) {
+std::string CaesarCipher::encrypt(const std::string& message) {
 	
 	std::string ciphertext{""}; //String to hold ciphered message
 	std::string alphabet{"ABCDEFGHIJKLMNOPQRSTUVWXYZ"}; //The alphabet to find letter position
