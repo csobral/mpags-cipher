@@ -9,16 +9,16 @@ TEST_CASE("Characters are uppercased", "[alphanumeric]") {
 }
 
 TEST_CASE("Digits are transliterated", "[alphanumeric]") {
-	REQUIRE( transformChar('0') == "ZERO" );
-	REQUIRE( transformChar('1') == "ONE" );
-	REQUIRE( transformChar('2') == "TWO" );
-	REQUIRE( transformChar('3') == "THREE" );
-	REQUIRE( transformChar('4') == "FOUR" );
-	REQUIRE( transformChar('5') == "FIVE" );
-	REQUIRE( transformChar('6') == "SIX" );
-	REQUIRE( transformChar('7') == "SEVEN" );
-	REQUIRE( transformChar('8') == "EIGHT" );
-	REQUIRE( transformChar('9') == "NINE" );
+	REQUIRE( (transformChar('0') == "ZERO") );
+	REQUIRE( (transformChar('1') == "ONE") );
+	REQUIRE( (transformChar('2') == "TWO") );
+	REQUIRE( (transformChar('3') == "THREE") );
+	REQUIRE( (transformChar('4') == "FOUR") );
+	REQUIRE( (transformChar('5') == "FIVE") );
+	REQUIRE( (transformChar('6') == "SIX") );
+	REQUIRE( (transformChar('7') == "SEVEN") );
+	REQUIRE( (transformChar('8') == "EIGHT") );
+	REQUIRE( (transformChar('9') == "NINE") );
 }
 
 TEST_CASE("Special characters are removed", "[punctuation]") {
