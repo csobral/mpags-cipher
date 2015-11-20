@@ -11,6 +11,7 @@
 #include "ProcessCommandLine.hpp"
 #include "CaesarCipher.hpp"
 #include "PlayfairCipher.hpp"
+#include "CipherFactory.hpp"
 
 template <typename T>
 void readStream(T& inputstream, std::string& message) {
@@ -41,11 +42,16 @@ int main(int argc, char* argv[]) {
 	}
 
 	//Checks whether program should exit
-	if(flags.error_flag) return(1);
-	else if(!flags.key_flag) {
+	if(!flags.key_flag) {
 		std::cout << "A CIPHER KEY MUST BE PROVIDED!" << std::endl;
-		return(1);
+		flags.error_flag = true;
 	}
+	if(!flags.c_flag) {
+		std::cout << "PLEASE SPECIFY WHICH CIPHER SHOULD BE USED!" << std::endl;
+		flags.error_flag = true;
+	}
+
+	if(flags.error_flag) return(1);
         else if(exit_flag) return(0);
 
 	if(!flags.i_flag) readStream(std::cin, message); //If no input file given, read from std::cin
@@ -62,16 +68,9 @@ int main(int argc, char* argv[]) {
 	for(const char ele : message) { //Transform message into cipherable text
 		trans_msg += transformChar(ele); //Spells out numbers, all letters uppercase
 	}
-	
-	if(flags.cipher == CipherType::caesar) {
-		CaesarCipher cipher(stoi(flags.key), flags.mode);
-		std::cout<< cipher.encrypt(trans_msg) << std::endl;
-	}
-	else if(flags.cipher == CipherType::playfair) {
-		PlayfairCipher cipher(flags.key, flags.mode);
-		std::cout<< cipher.encrypt(trans_msg) << std::endl;
-	}
-		
+
+	auto cipher = cipherFactory(flags.cipher, flags.key, flags.mode);	
+	std::cout << cipher->encrypt(trans_msg) << std::endl;	
 	
 	return 0;
 }

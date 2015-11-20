@@ -13,6 +13,7 @@ void processCommandLine(const int argc, char* argv[], CmdlineInfo& flags) {
 	 * v_flag: 'true' if user asks for version number
 	 * i_flag: 'true' if user supplies input file
 	 * o_flag: 'true' if user supplies output file
+	 * c_flag: 'true' if user has specified which cipher to use
 	 * decrypt: 'true' if user chooses to decrypt rather than encrypt
 	 * key_flag: 'true' if user supplies a key with argument '-k'
 	 * */
@@ -55,20 +56,26 @@ void processCommandLine(const int argc, char* argv[], CmdlineInfo& flags) {
 				flags.error_flag = true;
 				std::cout << "Please specify what cipher should be used with:\n"
                                  << "--cipher ciphername\n" 
-				 << "ciphername = caesar || playfair" << std::endl;
+				 << "ciphername = caesar || playfair || vigenere" << std::endl;
 			}
 			else {
 				std::string ciphstr = argv[i+1];
 				if(ciphstr == "caesar"){
 					flags.cipher = CipherType::caesar;
+					flags.c_flag = true;
 				}
 				else if(ciphstr == "playfair") {
 					flags.cipher = CipherType::playfair;
+					flags.c_flag = true;
+				}
+				else if(ciphstr == "vigenere") {
+					flags.cipher = CipherType::vigenere;
+					flags.c_flag = true;
 				}
 				else {
 					flags.error_flag = true;
 					std::cout << "Please provide a valid cipher type!\n"
-				 	<< "Valid ciphers: caesar, playfair" << std::endl;
+				 	<< "Valid ciphers: caesar, playfair, vigenere" << std::endl;
 				}
 			}
 		}	
@@ -109,5 +116,4 @@ void processCommandLine(const int argc, char* argv[], CmdlineInfo& flags) {
 			}
 		}
 	}
-
 }

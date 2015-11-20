@@ -2,6 +2,7 @@
 #define MPAGSCIPHER_PLAYFAIRCIPHER_HPP
 
 #include "ProcessCommandLine.hpp"
+#include "Cipher.hpp"
 
 //! De/encrypt a message using the Playfair cipher
 
@@ -11,11 +12,12 @@
  *
  */
 
-class PlayfairCipher {
+class PlayfairCipher : public Cipher {
   public:
 	PlayfairCipher(std::string& key, const CipherMode& mode);
 	
-	std::string encrypt(const std::string& message);
+	std::string encrypt(const std::string& message) const override;
+	std::string decrypt(const std::string& message) const override;
 
   private:
 	void setKey(std::string& key);

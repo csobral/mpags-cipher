@@ -2,6 +2,7 @@
 #define MPAGSCIPHER_CAESARCIPHER_HPP
 
 #include "ProcessCommandLine.hpp"
+#include "Cipher.hpp"
 
 //! De/encrypt a message using the Caesar cipher
 
@@ -12,7 +13,7 @@
  * Create a CaesarCipher object using CaesarCipher object(key,mode)
  * Decrypt/Encrypt a message with object.encode(message)
  */
-class CaesarCipher {
+class CaesarCipher : public Cipher {
   public:
 	/**
  	* Create a new CaesarCipher object with a key provided
@@ -29,7 +30,8 @@ class CaesarCipher {
 	*
 	* \param message The message the user wants to de/encrypt
 	*/ 
-	std::string encrypt(const std::string& message);
+	std::string encrypt(const std::string& message) const override;
+	std::string decrypt(const std::string& message) const override;
 
   private:
 	/**
@@ -40,8 +42,10 @@ class CaesarCipher {
 	* \param lett The letter we want the position of
 	* \param alphabet The alphabet being used
 	*/
-	int findPos(const char& lett, const std::string& alphabet);
+	int findPos(const char& lett, const std::string& alphabet) const;
 	
+	void setKey();
+
 	/// \param The key provided by the user
 	int key_;
 

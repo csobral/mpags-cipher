@@ -13,7 +13,8 @@ enum class CipherMode {
 
 enum class CipherType {
 	caesar,
-	playfair
+	playfair,
+	vigenere
 };
 
 /**
@@ -27,10 +28,11 @@ struct CmdlineInfo{
 	bool o_flag = false;
 	std::string iFile;
 	std::string oFile;
+	bool c_flag = false;
 	CipherMode mode = CipherMode::encrypt;
 	bool key_flag = false;
 	std::string key = "";
-	CipherType cipher = CipherType::caesar;
+	CipherType cipher;
 	
 	
 };
