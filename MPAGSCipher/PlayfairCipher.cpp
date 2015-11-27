@@ -37,7 +37,10 @@ void PlayfairCipher::setKey(std::string& key) {
 	std::transform(key.begin(), key.end(), key.begin(), rmvJ);
 
 	//Remove duplicated letters
-	
+	std::string uniq_lett;
+	auto rmv_lett = [&] (char c) {
+		
+	};	
 	//Store the coords of each letter
 	//
 	//Store the playfair cipher key map
