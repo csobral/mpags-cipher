@@ -22,6 +22,9 @@ endif()
 # - Add MPAGSCipher subdirectory to the build
 add_subdirectory(MPAGSCipher)
 
+# - Add Documentation subdirectory
+add_subdirectory(Documentation)
+
 # - Enable testing and add Testing subdirectory to the build
 enable_testing()
 add_subdirectory(Testing)
